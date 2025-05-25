@@ -1,8 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+/* Revised font-face for Baloo 2 with correct naming */
+@font-face {
+  font-family: 'baloo';
+  src: local('Baloo 2'), url('https://fonts.gstatic.com/s/baloo2/v14/wXK0E3kTposypRydzVT08TS3JnAmtdgozapv9w.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'baloo';
+  src: local('Baloo 2 Medium'), url('https://fonts.gstatic.com/s/baloo2/v14/wXK0E3kTposypRydzVT08TS3JnAmtdgazapv9w.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'baloo';
+  src: local('Baloo 2 SemiBold'), url('https://fonts.gstatic.com/s/baloo2/v14/wXK0E3kTposypRydzVT08TS3JnAmtdj8zapv9w.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'baloo';
+  src: local('Baloo 2 Bold'), url('https://fonts.gstatic.com/s/baloo2/v14/wXK0E3kTposypRydzVT08TS3JnAmtdjEzapv9w.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'baloo';
+  src: local('Baloo 2 ExtraBold'), url('https://fonts.gstatic.com/s/baloo2/v14/wXK0E3kTposypRydzVT08TS3JnAmtdjnzqpv9w.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Add utility classes for easy use with Tailwind */
+.font-baloo {
+  font-family: 'Baloo 2', cursive;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* 
+  The @import above correctly loads Nunito with all weights (200–1000) and both normal and italic styles.
+  To use the different weights, set font-weight in your CSS (e.g., font-weight: 700 for bold).
+  You do NOT need a @font-face block for Google Fonts imports; the @import is sufficient.
+  If you want to use Nunito as your default font, set it in your CSS, e.g.:
+  body { font-family: 'Nunito', sans-serif; }
+*/
+
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+	--color-saffron-primary: #C58C55;
+	--color-saffron-secondary: #E0B58A;
+	--color-saffron-light: #F5E6D7;
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -110,12 +176,4 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 

@@ -1,71 +1,71 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
+import { useState, useRef, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 interface BeforeAfterSliderProps {
-  beforeImage: string
-  afterImage: string
-  beforeAlt?: string
-  afterAlt?: string
-  height?: number
-  width?: number
+  beforeImage: string;
+  afterImage: string;
+  beforeAlt?: string;
+  afterAlt?: string;
+  height?: number;
+  width?: number;
 }
 
 export default function BeforeAfterSlider({
   beforeImage,
   afterImage,
-  beforeAlt = "Before image",
-  afterAlt = "After image",
+  beforeAlt = 'Before image',
+  afterAlt = 'After image',
   height = 600,
   width = 400,
 }: BeforeAfterSliderProps) {
-  const [sliderPosition, setSliderPosition] = useState(50)
-  const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = () => {
-    setIsDragging(true)
-  }
+    setIsDragging(true);
+  };
 
   const handleMouseUp = () => {
-    setIsDragging(false)
-  }
+    setIsDragging(false);
+  };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !containerRef.current) return
+    if (!isDragging || !containerRef.current) return;
 
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width))
-    const newPosition = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const newPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
-    setSliderPosition(newPosition)
-  }
+    setSliderPosition(newPosition);
+  };
 
   const handleTouchMove = (e: TouchEvent) => {
-    if (!isDragging || !containerRef.current) return
+    if (!isDragging || !containerRef.current) return;
 
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width))
-    const newPosition = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
+    const newPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
-    setSliderPosition(newPosition)
-  }
+    setSliderPosition(newPosition);
+  };
 
   useEffect(() => {
-    document.addEventListener("mousemove", handleMouseMove)
-    document.addEventListener("mouseup", handleMouseUp)
-    document.addEventListener("touchmove", handleTouchMove)
-    document.addEventListener("touchend", handleMouseUp)
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleMouseUp);
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
-      document.removeEventListener("mouseup", handleMouseUp)
-      document.removeEventListener("touchmove", handleTouchMove)
-      document.removeEventListener("touchend", handleMouseUp)
-    }
-  }, [isDragging])
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleMouseUp);
+    };
+  }, [isDragging, handleMouseMove, handleTouchMove]);
 
   return (
     <div
@@ -75,7 +75,13 @@ export default function BeforeAfterSlider({
     >
       {/* Before Image (Background) */}
       <div className="absolute inset-0">
-        <Image src={beforeImage || "/placeholder.svg"} alt={beforeAlt} fill className="object-cover" loading="eager" />
+        <Image
+          src={beforeImage || '/placeholder.svg'}
+          alt={beforeAlt}
+          fill
+          className="object-cover"
+          loading="eager"
+        />
       </div>
 
       {/* After Image (Foreground with clip) */}
@@ -85,7 +91,13 @@ export default function BeforeAfterSlider({
           clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`,
         }}
       >
-        <Image src={afterImage || "/placeholder.svg"} alt={afterAlt} fill className="object-cover" loading="eager" />
+        <Image
+          src={afterImage || '/placeholder.svg'}
+          alt={afterAlt}
+          fill
+          className="object-cover"
+          loading="eager"
+        />
       </div>
 
       {/* Slider Line */}
@@ -106,8 +118,12 @@ export default function BeforeAfterSlider({
       </div>
 
       {/* Labels */}
-      <div className="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 text-sm rounded">Before</div>
-      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 text-sm rounded">After</div>
+      <div className="absolute bottom-4 left-4 bg-black/50 text-white px-2 py-1 text-sm rounded">
+        Before
+      </div>
+      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 text-sm rounded">
+        After
+      </div>
     </div>
-  )
+  );
 }

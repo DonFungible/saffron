@@ -53,7 +53,7 @@ export default function FileGallery() {
   }
 
   return (
-    <div className="w-full mt-8 p-4 bg-white rounded-lg shadow-sm">
+    <div className="w-full mt-8 p-4 bg-white rounded-lg">
       {isLoading && (
         <div className="flex justify-center items-center h-40">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-saffron-primary"></div>
@@ -88,6 +88,9 @@ export default function FileGallery() {
               className="object-cover z-0"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-all duration-200 z-10" />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
+              <span className="text-white font-semibold text-lg px-3 py-1 rounded-md">View</span>
+            </div>
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
               {image.fileName}
             </div>

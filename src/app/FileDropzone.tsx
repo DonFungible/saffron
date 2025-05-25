@@ -116,7 +116,7 @@ export function FileDropzone({ onFilesChange, className }: FileDropzoneProps) {
         URL.revokeObjectURL(file.preview);
       });
     };
-  }, []);
+  }, [files]);
 
   // Function to handle file upload
   const handleUpload = async () => {
